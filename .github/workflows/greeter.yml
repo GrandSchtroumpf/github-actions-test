@@ -1,5 +1,8 @@
 name: Greet Everyone
-on: [push]
+on: 
+  pull_request:
+    paths:
+      - 'plugins'
 
 jobs:
   build:
