@@ -9,6 +9,7 @@ jobs:
     name: Push job
     runs-on: ubuntu-latest
     steps: 
+      - uses: actions/checkout@v1
       - name: Hello World
-        uses: github-actions-test/.github/build
+        uses: ./.github/actions/build
         id: hello
