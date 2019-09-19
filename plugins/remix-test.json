@@ -1,3 +1,4 @@
 {
-  "name": "remixTest"
+  "name": "remixTest",
+  "kind": "testing"
 }
