@@ -10,9 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Hello World
-        uses: ./.github/actions/build
-        with:
-          who-to-greet: 'Mona the Octocat'
+        uses: ../actions/build
         id: hello
-      - name: Echo Greeting
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
