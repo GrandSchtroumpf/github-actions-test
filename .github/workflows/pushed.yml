@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Hello World
-        uses: ../actions/build
+        uses: github-actions-test/.github/build
         id: hello
