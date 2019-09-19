@@ -1,5 +1,6 @@
 {
   "name": "ethdoc",
   "displayName": "Solidity documentation Generator",
-  "kind": "documentation"
+  "kind": "documentation",
+  "description": "Generate documentation out of the solidity natspec"
 }

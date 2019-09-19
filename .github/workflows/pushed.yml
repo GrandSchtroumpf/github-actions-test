@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Hello World
-        uses: actions/build@v1
+        uses: ./actions/build@v1
         with:
           who-to-greet: 'Mona the Octocat'
         id: hello
