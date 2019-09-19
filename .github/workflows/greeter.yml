@@ -2,7 +2,7 @@ name: Greet Everyone
 on: 
   pull_request:
     paths:
-      - 'plugins'
+      - 'plugins/*'
 
 jobs:
   build:
