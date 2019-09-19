@@ -1,4 +1,4 @@
-name: Greet Everyone
+name: Pull Requested
 on: 
   pull_request:
     paths:
