@@ -1,4 +1,5 @@
 {
   "name": "ethdoc",
+  "displayName": "Solidity documentation Generator",
   "kind": "documentation"
 }
