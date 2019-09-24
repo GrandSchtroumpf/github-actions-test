@@ -13,3 +13,5 @@ jobs:
       - name: Hello World
         uses: ./.github/actions/build
         id: hello
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
