@@ -1,4 +1,5 @@
 {
   "name": "etherscan",
-  "displayName": "Etherscan"
+  "displayName": "Etherscan",
+  "description": "Verify your contract on etherscan"
 }
