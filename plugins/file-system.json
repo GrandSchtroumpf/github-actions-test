@@ -1,3 +1,4 @@
 {
-  "name": "fileSystem"
+  "name": "fileSystem",
+  "kind": "fs"
 }
