@@ -4,7 +4,7 @@ import { context, GitHub } from '@actions/github';
 try {
   const token = getInput('GITHUB_TOKEN');
   const octokit = new GitHub(token);
-  octokit.repos.updateFile({
+  octokit.repos.createOrUpdateFile({
     ...context.repo,
     content: 'Hello World',
     path: 'build/result.js',
