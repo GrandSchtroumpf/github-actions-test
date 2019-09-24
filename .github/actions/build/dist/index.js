@@ -4509,7 +4509,7 @@ var github_1 = __webpack_require__(104);
 try {
     var token = core_1.getInput('GITHUB_TOKEN');
     var octokit = new github_1.GitHub(token);
-    octokit.repos.updateFile(__assign({}, github_1.context.repo, { content: 'Hello World', path: 'build/result.js', message: '[Action] build plugin list' }));
+    octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'Hello World', path: 'build/result.js', message: '[Action] build plugin list' }));
 }
 catch (err) {
     core_1.setFailed(err);
