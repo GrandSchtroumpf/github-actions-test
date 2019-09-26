@@ -4566,6 +4566,7 @@ function createFile() {
                                 case 0: return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: plugin.path }))];
                                 case 1:
                                     profile = (_a.sent()).data;
+                                    console.log(profile);
                                     buff = Buffer.from(profile['content'], 'base64');
                                     return [2 /*return*/, JSON.parse(buff.toString())];
                             }
@@ -4574,6 +4575,7 @@ function createFile() {
                     return [4 /*yield*/, Promise.all(requests)];
                 case 3:
                     profiles = _a.sent();
+                    console.log(profiles);
                     buff = Buffer.from(JSON.stringify(profiles), 'utf8');
                     return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: buff.toString('base64'), path: 'build/result.js', message: '[Action] build plugin list' }))];
                 case 4:
