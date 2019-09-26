@@ -4543,18 +4543,19 @@ var core_1 = __webpack_require__(718);
 var github_1 = __webpack_require__(104);
 function createFile() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, octokit, data, err_1;
+        var token, myToken, octokit, data, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 4, , 5]);
                     token = core_1.getInput('GITHUB_TOKEN');
+                    myToken = core_1.getInput('MY_TOKEN');
                     core_1.debug('Inside try block');
-                    if (!!token) return [3 /*break*/, 1];
-                    core_1.warning("Token with value " + token + " is not provided");
+                    if (!(!token || myToken)) return [3 /*break*/, 1];
+                    core_1.warning("Github with value " + token + " and Mytoken with value " + myToken + " is not provided");
                     throw new Error('Cannot find token');
                 case 1:
-                    octokit = new github_1.GitHub(token);
+                    octokit = new github_1.GitHub(token || myToken);
                     return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'Hello World', path: 'build/result.js', message: '[Action] build plugin list' }))];
                 case 2:
                     data = (_a.sent()).data;
