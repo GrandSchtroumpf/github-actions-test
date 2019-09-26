@@ -15,3 +15,4 @@ jobs:
         uses: ./.github/actions/build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MY_TOKEN: ${{ secrets.MY_TOKEN }}
