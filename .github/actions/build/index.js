@@ -50,7 +50,7 @@ var core_1 = require("@actions/core");
 var github_1 = require("@actions/github");
 function createFile() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, repos_1, plugins, requests, profiles, buff, err_1;
+        var token, repos_1, plugins, requests, profiles, buff, content, err_1;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -73,7 +73,6 @@ function createFile() {
                                 case 0: return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: plugin.path }))];
                                 case 1:
                                     profile = (_a.sent()).data;
-                                    console.log(profile);
                                     buff = Buffer.from(profile['content'], 'base64');
                                     return [2 /*return*/, JSON.parse(buff.toString())];
                             }
@@ -82,9 +81,10 @@ function createFile() {
                     return [4 /*yield*/, Promise.all(requests)];
                 case 3:
                     profiles = _a.sent();
-                    console.log(profiles);
                     buff = Buffer.from(JSON.stringify(profiles), 'utf8');
-                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: buff.toString('base64'), path: 'build/result.js', message: '[Action] build plugin list' }))];
+                    content = buff.toString('base64');
+                    console.log(content);
+                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: content, path: 'build/allProfiles.js', message: '[Action] build plugin list' }))];
                 case 4:
                     _a.sent();
                     _a.label = 5;
