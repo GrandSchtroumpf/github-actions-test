@@ -3,13 +3,13 @@ import { context, GitHub } from '@actions/github';
 
 async function createFile() {
   try {
-    const token = getInput('GITHUB_TOKEN');
+    const token = getInput('github-token');
     debug('Inside try block');
   
     if (!token) {
       warning('Token is not provided');
     }
-    
+
     const octokit = new GitHub(token);
     const { data } = await octokit.repos.createOrUpdateFile({
       ...context.repo,
