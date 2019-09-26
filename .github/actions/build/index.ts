@@ -12,10 +12,17 @@ async function createFile() {
       warning(`Github env with value ${token} is not provided`);
       throw new Error('Cannot find token');
     } else {
-      const octokit = new GitHub(token);
-      const { data: plugins } = await octokit.repos.getContents({ ...context.repo, path: 'plugins' });
-      console.log(plugins);
-      await octokit.repos.createOrUpdateFile({
+      const { repos } = new GitHub(token);
+      const { data: plugins } = await repos.getContents({ ...context.repo, path: 'plugins' });
+      const requests = (plugins as Array<ReposGetContentsResponseItem>).map(async plugin => {
+        const { data: profile } = await repos.getContents({ ...context.repo, path: plugin.path });
+        console.log(profile);
+        return profile['content'] as string;
+      });
+      const profiles = await Promise.all(requests);
+      console.log(profiles);
+
+      await repos.createOrUpdateFile({
         ...context.repo,
         content: 'SGVsbG8gV29ybGQ=',
         path: 'build/result.js',
