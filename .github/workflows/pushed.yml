@@ -14,4 +14,4 @@ jobs:
       - name: Upsert File
         uses: ./.github/actions/build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github-token }}

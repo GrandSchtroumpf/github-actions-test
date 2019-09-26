@@ -55,7 +55,7 @@ function createFile() {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    token = core_1.getInput('GITHUB_TOKEN');
+                    token = core_1.getInput('github-token');
                     core_1.debug('Inside try block');
                     if (!token) {
                         core_1.warning('Token is not provided');
