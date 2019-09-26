@@ -50,7 +50,7 @@ var core_1 = require("@actions/core");
 var github_1 = require("@actions/github");
 function createFile() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, repos_1, plugins, requests, profiles, err_1;
+        var token, repos_1, plugins, requests, profiles, buff, err_1;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -67,22 +67,22 @@ function createFile() {
                 case 2:
                     plugins = (_a.sent()).data;
                     requests = plugins.map(function (plugin) { return __awaiter(_this, void 0, void 0, function () {
-                        var profile;
+                        var profile, buff;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: plugin.path }))];
                                 case 1:
                                     profile = (_a.sent()).data;
-                                    console.log(profile);
-                                    return [2 /*return*/, profile['content']];
+                                    buff = new Buffer(profile['content']);
+                                    return [2 /*return*/, JSON.parse(buff.toString('utf8'))];
                             }
                         });
                     }); });
                     return [4 /*yield*/, Promise.all(requests)];
                 case 3:
                     profiles = _a.sent();
-                    console.log(profiles);
-                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'SGVsbG8gV29ybGQ=', path: 'build/result.js', message: '[Action] build plugin list' }))];
+                    buff = new Buffer(JSON.stringify(profiles));
+                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: buff.toString('base64'), path: 'build/result.js', message: '[Action] build plugin list' }))];
                 case 4:
                     _a.sent();
                     _a.label = 5;
