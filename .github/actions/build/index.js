@@ -50,11 +50,11 @@ var core_1 = require("@actions/core");
 var github_1 = require("@actions/github");
 function createFile() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, octokit, data, err_1;
+        var token, octokit, plugins, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 4, , 5]);
+                    _a.trys.push([0, 5, , 6]);
                     token = core_1.getInput('GITHUB_TOKEN');
                     core_1.debug('Inside try block');
                     if (!!token) return [3 /*break*/, 1];
@@ -62,17 +62,20 @@ function createFile() {
                     throw new Error('Cannot find token');
                 case 1:
                     octokit = new github_1.GitHub(token);
-                    return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'SGVsbG8gV29ybGQ=', path: 'build/result.js', message: '[Action] build plugin list' }))];
+                    return [4 /*yield*/, octokit.repos.getContents(__assign({}, github_1.context.repo, { path: 'plugins' }))];
                 case 2:
-                    data = (_a.sent()).data;
-                    console.log(data.commit, data.content);
-                    _a.label = 3;
-                case 3: return [3 /*break*/, 5];
-                case 4:
+                    plugins = (_a.sent()).data;
+                    console.log(plugins);
+                    return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'SGVsbG8gV29ybGQ=', path: 'build/result.js', message: '[Action] build plugin list' }))];
+                case 3:
+                    _a.sent();
+                    _a.label = 4;
+                case 4: return [3 /*break*/, 6];
+                case 5:
                     err_1 = _a.sent();
                     core_1.setFailed(err_1);
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
