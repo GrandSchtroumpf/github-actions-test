@@ -1,5 +1,6 @@
 import { setFailed, getInput, debug, warning } from '@actions/core';
 import { context, GitHub } from '@actions/github';
+import { ReposGetContentsResponseItem } from '@octokit/rest';
 
 async function createFile() {
   try {
@@ -12,13 +13,14 @@ async function createFile() {
       throw new Error('Cannot find token');
     } else {
       const octokit = new GitHub(token);
-      const { data } = await octokit.repos.createOrUpdateFile({
+      const { data: plugins } = await octokit.repos.getContents({ ...context.repo, path: 'plugins' });
+      console.log(plugins);
+      await octokit.repos.createOrUpdateFile({
         ...context.repo,
         content: 'SGVsbG8gV29ybGQ=',
         path: 'build/result.js',
         message: '[Action] build plugin list'
       });
-      console.log(data.commit, data.content);
     }
   } catch(err) {
     setFailed(err);
