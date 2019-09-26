@@ -4543,32 +4543,48 @@ var core_1 = __webpack_require__(718);
 var github_1 = __webpack_require__(104);
 function createFile() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, octokit, plugins, err_1;
+        var token, repos_1, plugins, requests, profiles, buff, err_1;
+        var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 5, , 6]);
+                    _a.trys.push([0, 6, , 7]);
                     token = core_1.getInput('GITHUB_TOKEN');
                     core_1.debug('Inside try block');
                     if (!!token) return [3 /*break*/, 1];
                     core_1.warning("Github env with value " + token + " is not provided");
                     throw new Error('Cannot find token');
                 case 1:
-                    octokit = new github_1.GitHub(token);
-                    return [4 /*yield*/, octokit.repos.getContents(__assign({}, github_1.context.repo, { path: 'plugins' }))];
+                    repos_1 = new github_1.GitHub(token).repos;
+                    return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: 'plugins' }))];
                 case 2:
                     plugins = (_a.sent()).data;
-                    console.log(plugins);
-                    return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'SGVsbG8gV29ybGQ=', path: 'build/result.js', message: '[Action] build plugin list' }))];
+                    requests = plugins.map(function (plugin) { return __awaiter(_this, void 0, void 0, function () {
+                        var profile, buff;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: plugin.path }))];
+                                case 1:
+                                    profile = (_a.sent()).data;
+                                    buff = Buffer.from(profile['content'], 'base64');
+                                    return [2 /*return*/, JSON.parse(buff.toString())];
+                            }
+                        });
+                    }); });
+                    return [4 /*yield*/, Promise.all(requests)];
                 case 3:
+                    profiles = _a.sent();
+                    buff = Buffer.from(JSON.stringify(profiles), 'utf8');
+                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: buff.toString('base64'), path: 'build/result.js', message: '[Action] build plugin list' }))];
+                case 4:
                     _a.sent();
-                    _a.label = 4;
-                case 4: return [3 /*break*/, 6];
-                case 5:
+                    _a.label = 5;
+                case 5: return [3 /*break*/, 7];
+                case 6:
                     err_1 = _a.sent();
                     core_1.setFailed(err_1);
-                    return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                    return [3 /*break*/, 7];
+                case 7: return [2 /*return*/];
             }
         });
     });
