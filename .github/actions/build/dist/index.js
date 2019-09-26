@@ -4555,7 +4555,7 @@ function createFile() {
                     throw new Error('Cannot find token');
                 case 1:
                     octokit = new github_1.GitHub(token);
-                    return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'Hello World', path: 'build/result.js', message: '[Action] build plugin list' }))];
+                    return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'SGVsbG8gV29ybGQ=', path: 'build/result.js', message: '[Action] build plugin list' }))];
                 case 2:
                     data = (_a.sent()).data;
                     console.log(data.commit, data.content);

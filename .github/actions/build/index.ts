@@ -14,7 +14,7 @@ async function createFile() {
       const octokit = new GitHub(token);
       const { data } = await octokit.repos.createOrUpdateFile({
         ...context.repo,
-        content: 'Hello World',
+        content: 'SGVsbG8gV29ybGQ=',
         path: 'build/result.js',
         message: '[Action] build plugin list'
       });
