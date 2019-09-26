@@ -7,7 +7,7 @@ async function createFile() {
     debug('Inside try block');
   
     if (!token) {
-      warning('Token is not provided: ' + token);
+      warning(`Token with value ${token} is not provided`);
       throw new Error('Cannot find token');
     } else {
       const octokit = new GitHub(token);

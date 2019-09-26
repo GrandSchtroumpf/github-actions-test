@@ -58,7 +58,7 @@ function createFile() {
                     token = core_1.getInput('GITHUB_TOKEN');
                     core_1.debug('Inside try block');
                     if (!!token) return [3 /*break*/, 1];
-                    core_1.warning('Token is not provided: ' + token);
+                    core_1.warning("Token with value " + token + " is not provided");
                     throw new Error('Cannot find token');
                 case 1:
                     octokit = new github_1.GitHub(token);

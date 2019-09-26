@@ -1,5 +1,5 @@
 {
   "name": "fileSystem",
   "kind": "fs",
-  "description": "Simple File System"
+  "description": "Simple File System for the IDE"
 }
