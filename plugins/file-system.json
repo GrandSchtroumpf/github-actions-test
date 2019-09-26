@@ -1,4 +1,5 @@
 {
   "name": "fileSystem",
-  "kind": "fs"
+  "kind": "fs",
+  "description": "Simple File System"
 }
