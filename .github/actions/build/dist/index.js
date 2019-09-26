@@ -4543,12 +4543,12 @@ var core_1 = __webpack_require__(718);
 var github_1 = __webpack_require__(104);
 function createFile() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, repos_1, plugins, requests, profiles, buff, content, err_1;
+        var token, repos_1, plugins, requests, profiles, buff, content, path, file, err_1;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 6, , 7]);
+                    _a.trys.push([0, 7, , 8]);
                     token = core_1.getInput('GITHUB_TOKEN');
                     core_1.debug('Inside try block');
                     if (!!token) return [3 /*break*/, 1];
@@ -4577,16 +4577,21 @@ function createFile() {
                     buff = Buffer.from(JSON.stringify(profiles), 'utf8');
                     content = buff.toString('base64');
                     console.log(content);
-                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { content: content, path: 'build/allProfiles.js', message: '[Action] build plugin list' }))];
+                    path = 'build/allProfiles.js';
+                    return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: path }))];
                 case 4:
+                    file = _a.sent();
+                    return [4 /*yield*/, repos_1.createOrUpdateFile(__assign({}, github_1.context.repo, { message: '[Action] build plugin list', sha: file.data['sha'], content: content,
+                            path: path }))];
+                case 5:
                     _a.sent();
-                    _a.label = 5;
-                case 5: return [3 /*break*/, 7];
-                case 6:
+                    _a.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
                     err_1 = _a.sent();
                     core_1.setFailed(err_1);
-                    return [3 /*break*/, 7];
-                case 7: return [2 /*return*/];
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });

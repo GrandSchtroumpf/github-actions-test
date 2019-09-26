@@ -24,11 +24,14 @@ async function createFile() {
       const content = buff.toString('base64');
   
       console.log(content);
+      const path = 'build/allProfiles.js';
+      const file = await repos.getContents({ ...context.repo, path });
       await repos.createOrUpdateFile({
         ...context.repo,
-        content: content,
-        path: 'build/allProfiles.js',
-        message: '[Action] build plugin list'
+        message: '[Action] build plugin list',
+        sha: file.data['sha'],
+        content,
+        path,
       });
     }
   } catch(err) {
