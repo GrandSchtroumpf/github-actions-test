@@ -3,18 +3,15 @@ import { context, GitHub } from '@actions/github';
 
 async function createFile() {
   try {
-    const tokenEnv = getInput('GITHUB_TOKEN');
-    const tokenWith = getInput('GITHUB_TOKEN');
-    const myToken = getInput('MY_TOKEN');
+    const token = getInput('GITHUB_TOKEN');
+
     debug('Inside try block');
   
-    console.log(process.env.GITHUB_TOKEN)
-
-    if (!tokenEnv || myToken || tokenWith) {
-      warning(`Github env with value ${tokenEnv} and with WITH ${tokenWith} and Mytoken with value ${myToken} is not provided`);
+    if (!token) {
+      warning(`Github env with value ${token} is not provided`);
       throw new Error('Cannot find token');
     } else {
-      const octokit = new GitHub(tokenEnv || myToken || tokenWith);
+      const octokit = new GitHub(token);
       const { data } = await octokit.repos.createOrUpdateFile({
         ...context.repo,
         content: 'Hello World',
