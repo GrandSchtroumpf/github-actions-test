@@ -16,11 +16,11 @@ async function createFile() {
       const { data: plugins } = await repos.getContents({ ...context.repo, path: 'plugins' });
       const requests = (plugins as Array<ReposGetContentsResponseItem>).map(async plugin => {
         const { data: profile } = await repos.getContents({ ...context.repo, path: plugin.path });
-        const buff = new Buffer(profile['content'] as string);
-        return JSON.parse(buff.toString('utf8'));
+        const buff = Buffer.from(profile['content'], 'base64');
+        return JSON.parse(buff.toString());
       });
       const profiles = await Promise.all(requests);
-      const buff = new Buffer(JSON.stringify(profiles));
+      const buff = Buffer.from(JSON.stringify(profiles), 'utf8');
       await repos.createOrUpdateFile({
         ...context.repo,
         content: buff.toString('base64'),
