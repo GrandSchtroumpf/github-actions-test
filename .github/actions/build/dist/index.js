@@ -4549,6 +4549,10 @@ function createFile() {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     token = core_1.getInput('GITHUB_TOKEN');
+                    core_1.debug('Inside try block');
+                    if (!token) {
+                        core_1.warning('Token is not provided');
+                    }
                     octokit = new github_1.GitHub(token);
                     return [4 /*yield*/, octokit.repos.createOrUpdateFile(__assign({}, github_1.context.repo, { content: 'Hello World', path: 'build/result.js', message: '[Action] build plugin list' }))];
                 case 1:

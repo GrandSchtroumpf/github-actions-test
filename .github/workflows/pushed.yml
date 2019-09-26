@@ -9,9 +9,9 @@ jobs:
     name: Push job
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Upsert File
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
         uses: ./.github/actions/build
-        id: upsertFile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
