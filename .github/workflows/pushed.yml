@@ -1,4 +1,4 @@
-name: Pushed
+name: 'Add Plugin Profile'
 on:
   push:
     branches:
