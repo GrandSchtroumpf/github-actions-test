@@ -1,6 +1,6 @@
 {
   "name": "vyper",
-  "displayName": "Vyper",
+  "displayName": "Vyper Compiler",
   "methods": ["getCompilationResult", "compile"],
   "url": "ipfs://Qmc44GYa4ZxhkCQ8yUNwcwTWnABaoZbw7FV5PWu4EW7YdN",
   "description": "Compile vyper contracts",
