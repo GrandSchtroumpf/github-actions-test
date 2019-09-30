@@ -1,6 +1,0 @@
-{
-  "name": "fileSystem",
-  "displayName": "File System",
-  "kind": "fs",
-  "description": "Simple File System for the IDE."
-}

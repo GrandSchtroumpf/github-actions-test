@@ -1,6 +1,0 @@
-{
-  "name": "remixUnitTest",
-  "displayName": "Remix Test",
-  "kind": "unitTest",
-  "description": "A testing library for solidity smart-contract."
-}
