@@ -4550,7 +4550,6 @@ function createFile() {
                 case 0:
                     _a.trys.push([0, 7, , 8]);
                     token = core_1.getInput('GITHUB_TOKEN');
-                    core_1.debug('Inside try block');
                     if (!!token) return [3 /*break*/, 1];
                     core_1.warning("Github env with value " + token + " is not provided");
                     throw new Error('Cannot find token');
@@ -4560,10 +4559,12 @@ function createFile() {
                 case 2:
                     plugins = (_a.sent()).data;
                     requests = plugins.map(function (plugin) { return __awaiter(_this, void 0, void 0, function () {
-                        var profile, buff;
+                        var path, profile, buff;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0: return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: plugin.path }))];
+                                case 0:
+                                    path = plugin.path + "/profile.json";
+                                    return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: path }))];
                                 case 1:
                                     profile = (_a.sent()).data;
                                     buff = Buffer.from(profile['content'], 'base64');
@@ -4576,8 +4577,7 @@ function createFile() {
                     profiles = _a.sent();
                     buff = Buffer.from(JSON.stringify(profiles), 'utf8');
                     content = buff.toString('base64');
-                    console.log(content);
-                    path = 'build/allProfiles.js';
+                    path = 'build/profile.json';
                     return [4 /*yield*/, repos_1.getContents(__assign({}, github_1.context.repo, { path: path }))];
                 case 4:
                     file = _a.sent();
