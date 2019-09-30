@@ -1,6 +1,8 @@
 name: Pushed
 on:
   push:
+    branches:
+      - master
     paths:
       - 'plugins/*'
 
@@ -11,7 +13,7 @@ jobs:
     steps: 
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Upsert File
-        uses: ./.github/actions/build
+      - name: Create plugins directory
+        uses: ./.github/actions/directory
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
